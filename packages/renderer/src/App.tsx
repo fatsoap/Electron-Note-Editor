@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./app.css";
 import bg from "../assets/bg.jpg";
 import NoteScreen from "./components/NoteScreen/NoteScreen";
 
 const App = () => {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="app container">
       <img src={bg} id="background" />

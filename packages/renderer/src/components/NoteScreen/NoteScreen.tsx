@@ -1,16 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import "./NoteScreen.css";
-import MDEditor, {
-  commands,
-  ICommand,
-  TextState,
-  TextAreaTextApi,
-} from "@uiw/react-md-editor";
+import MDEditor from "@uiw/react-md-editor";
 
 const NoteScreen = () => {
   const [text, setText] = useState("**Hello world!!!**");
   const [editing, setEditing] = useState(false);
-  const tt: any = useRef(null);
+
   return (
     <div className="container" style={{ border: "1px solid black" }}>
       <div>

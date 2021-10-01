@@ -13,7 +13,7 @@
     "lint": "eslint . --ext js,ts,tsx",
     "typecheck-main": "tsc --noEmit -p packages/main/tsconfig.json",
     "typecheck-preload": "tsc --noEmit -p packages/preload/tsconfig.json",
-    "typecheck-renderer": "tsx-tsc --noEmit -p packages/renderer/tsconfig.json",
+    "typecheck-renderer": "tsc --noEmit -p packages/renderer/tsconfig.json",
     "typecheck": "yarn typecheck-main && yarn typecheck-preload && yarn typecheck-renderer"
   },
   "browserslist": [
