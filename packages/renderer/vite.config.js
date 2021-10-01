@@ -11,11 +11,18 @@ const PACKAGE_ROOT = __dirname;
  * @see https://vitejs.dev/config/
  */
 const config = {
+  define: {
+    "process.env": {},
+  },
   mode: process.env.MODE,
   root: PACKAGE_ROOT,
   resolve: {
     alias: {
       "/@/": join(PACKAGE_ROOT, "src") + "/",
+    },
+    extensions: [".json", ".ts", ".js", ".tsx"],
+    fallback: {
+      assert: require.resolve("assert/"), // don't forget  to install assert (npm i --save-dev assert)
     },
   },
   plugins: [],

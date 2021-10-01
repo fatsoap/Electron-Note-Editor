@@ -11,17 +11,17 @@ if (!isSingleInstance) {
 
 app.disableHardwareAcceleration();
 
-// Install "Vue.js devtools"
+// Install "React.js devtools"
 if (import.meta.env.MODE === "development") {
   app
     .whenReady()
     .then(() => import("electron-devtools-installer"))
-    .then(({ default: installExtension, VUEJS3_DEVTOOLS }) =>
-      installExtension(VUEJS3_DEVTOOLS, {
+    .then(({ default: installExtension, REACT_DEVELOPER_TOOLS }) =>
+      installExtension(REACT_DEVELOPER_TOOLS, {
         loadExtensionOptions: {
           allowFileAccess: true,
         },
-      })
+      }),
     )
     .catch((e) => console.error("Failed install extension:", e));
 }
@@ -64,7 +64,7 @@ const createWindow = async () => {
       ? import.meta.env.VITE_DEV_SERVER_URL
       : new URL(
           "../renderer/dist/index.html",
-          "file://" + __dirname
+          "file://" + __dirname,
         ).toString();
 
   await mainWindow.loadURL(pageUrl);
