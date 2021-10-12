@@ -1,6 +1,29 @@
-import {contextBridge} from 'electron';
+import { contextBridge } from "electron";
+import { readFile, writeFile, readdir, mkdir } from "fs/promises";
+import * as path from "path";
+import { ipcRenderer } from "electron";
+const userDataPath = ipcRenderer.sendSync("get-user-data-path", "ping");
+const data_folder = path.join(userDataPath, "Data");
 
-const apiKey = 'electron';
+mkdir(data_folder, { recursive: true });
+
+const customKey = "customApi";
+/**
+ * @see https://github.com/electron/electron/issues/21437#issuecomment-573522360
+ */
+const customApi = {
+  readFile: async (dir: string) =>
+    await readFile(path.join(data_folder, dir), { encoding: "utf-8" }),
+  writeFile: async (dir: string, data: string) =>
+    await writeFile(path.join(data_folder, dir), data),
+  getAllFile: async () => await readdir(data_folder),
+  getDirname: __dirname,
+  dataFolder: data_folder,
+};
+
+contextBridge.exposeInMainWorld(customKey, customApi);
+
+const apiKey = "electron";
 /**
  * @see https://github.com/electron/electron/issues/21437#issuecomment-573522360
  */

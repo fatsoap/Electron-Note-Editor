@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./NoteScreen.css";
 import MDEditor from "@uiw/react-md-editor";
 
@@ -6,8 +6,23 @@ const NoteScreen = () => {
   const [text, setText] = useState("**Hello world!!!**");
   const [editing, setEditing] = useState(false);
 
+  //let main_screen = screen.getAllDisplays();
+  let win_h = 500; //main_screen.size.height
+
+  useEffect(() => {
+    //window.customApi.writeFile("test.txt", "some text");
+    refresh();
+  }, []);
+
+  const refresh = async () => {
+    //let a = await window.customApi.readFile("test.txt");
+    console.log(window.customApi.dataFolder);
+    let a = await window.customApi.getAllFile();
+    console.log(a);
+  };
+
   return (
-    <div className="container" style={{ border: "1px solid black" }}>
+    <div className="note-container" style={{}}>
       <div>
         <button onClick={() => setEditing(!editing)}>Toggle</button>
       </div>
@@ -17,17 +32,16 @@ const NoteScreen = () => {
           onChange={(t) => {
             if (t) setText(t);
           }}
+          height={win_h}
           commands={[]}
           preview={"edit"}
           visiableDragbar={false}
           hideToolbar={true}
           style={{
             backgroundColor: "transparent",
-            borderWidth: 1,
-            borderColor: "red",
-            borderRadius: "30px",
             WebkitBoxShadow: "0px",
             boxShadow: "0px 0px 0px #000000",
+            height: 700,
           }}
         />
       ) : (

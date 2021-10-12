@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from "electron";
 import { join } from "path";
 import { URL } from "url";
+const { ipcMain } = require("electron");
 
 const isSingleInstance = app.requestSingleInstanceLock();
 
@@ -21,7 +22,7 @@ if (import.meta.env.MODE === "development") {
         loadExtensionOptions: {
           allowFileAccess: true,
         },
-      }),
+      })
     )
     .catch((e) => console.error("Failed install extension:", e));
 }
@@ -64,7 +65,7 @@ const createWindow = async () => {
       ? import.meta.env.VITE_DEV_SERVER_URL
       : new URL(
           "../renderer/dist/index.html",
-          "file://" + __dirname,
+          "file://" + __dirname
         ).toString();
 
   await mainWindow.loadURL(pageUrl);
@@ -97,3 +98,8 @@ if (import.meta.env.PROD) {
     .then(({ autoUpdater }) => autoUpdater.checkForUpdatesAndNotify())
     .catch((e) => console.error("Failed check updates:", e));
 }
+
+ipcMain.on("get-user-data-path", (event, arg) => {
+  console.log(app.getPath("userData")); // prints "ping"
+  event.returnValue = app.getPath("userData");
+});
