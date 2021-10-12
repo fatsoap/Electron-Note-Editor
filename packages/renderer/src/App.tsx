@@ -2,15 +2,35 @@ import React from "react";
 import "./app.css";
 import bg from "../assets/bg.jpg";
 import NoteScreen from "./components/NoteScreen/NoteScreen";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  //Link
+} from 'react-router-dom';
+import NavBar from "./components/NavBar/NavBar";
 
 const App = () => {
   return (
-    <div className="app container">
+    
+    <div className="app">
+      <Router>
       <img src={bg} id="background" />
-      <h2>This is React + Vite + Electron !</h2>
-      <main>
-        <NoteScreen />
+      <main className="main-container" >
+        <NavBar />
+        <Switch>
+          <Route path="/note">
+            <NoteScreen />
+          </Route>
+          <Route path="/users">
+          <div />
+          </Route>
+          <Route path="/">
+          <div />
+          </Route>
+        </Switch>
       </main>
+      </Router>
     </div>
   );
 };
