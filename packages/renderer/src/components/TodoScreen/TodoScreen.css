@@ -1,0 +1,65 @@
+.note-container {
+  /* width: 500px; */
+  /* width: 80%; */
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #b4b4b4;
+  border-radius: 10px;
+}
+
+* {
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+[draggable="true"] {
+  /*
+   To prevent user selecting inside the drag source
+  */
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.todo-list {
+  resize: none;
+  overflow: hidden;
+  padding: 5px 0 5px 0;
+  font-size: 18px;
+}
+
+.add-todo {
+  border: 1px solid #000;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  margin: 4px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.add-todo.plus:before,
+.add-todo.plus:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: green;
+}
+.add-todo.plus:before {
+  width: 5px;
+  margin: 5px auto;
+}
+.add-todo.plus:after {
+  margin: auto 5px;
+  height: 5px;
+}
