@@ -7,29 +7,29 @@ import {
   Switch,
   Route,
   //Link
-} from 'react-router-dom';
+} from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
+import TodoScreen from "./components/TodoScreen/TodoScreen";
 
 const App = () => {
   return (
-    
     <div className="app">
       <Router>
-      <img src={bg} id="background" />
-      <main className="main-container" >
-        <NavBar />
-        <Switch>
-          <Route path="/note">
-            <NoteScreen />
-          </Route>
-          <Route path="/users">
-          <div />
-          </Route>
-          <Route path="/">
-          <div />
-          </Route>
-        </Switch>
-      </main>
+        <img src={bg} id="background" />
+        <main className="main-container">
+          <NavBar />
+          <Switch>
+            <Route path="/note">
+              <NoteScreen />
+            </Route>
+            <Route path="/todo">
+              <TodoScreen />
+            </Route>
+            <Route path="/">
+              <div />
+            </Route>
+          </Switch>
+        </main>
       </Router>
     </div>
   );

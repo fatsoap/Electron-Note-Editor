@@ -7,24 +7,36 @@ const NavBar = () => {
   const [current, setCurrent] = useState(0);
 
   return (
-    <div className="nav-container" style={{ }}>
+    <div className="nav-container" style={{}}>
       <div className={current.toString()}>
-        <button onClick={() => {
-          setCurrent(1)
-          history.push("/note")
-        }}>Note</button>
+        <button
+          onClick={() => {
+            setCurrent(1);
+            history.push("/note");
+          }}
+        >
+          Note
+        </button>
       </div>
       <div>
-        <button onClick={() => {
-          setCurrent(1)
-          history.push("/users")
-        }}>Note</button>
+        <button
+          onClick={() => {
+            setCurrent(1);
+            history.push("/todo");
+          }}
+        >
+          Todo
+        </button>
       </div>
       <div>
-        <button onClick={() => {
-          setCurrent(1)
-          history.push("/")
-        }}>Note</button>
+        <button
+          onClick={() => {
+            setCurrent(1);
+            history.push("/");
+          }}
+        >
+          Note
+        </button>
       </div>
     </div>
   );

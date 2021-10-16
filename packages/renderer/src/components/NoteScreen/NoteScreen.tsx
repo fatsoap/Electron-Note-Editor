@@ -16,9 +16,9 @@ const NoteScreen = () => {
 
   const refresh = async () => {
     //let a = await window.customApi.readFile("test.txt");
-    console.log(window.customApi.dataFolder);
-    let a = await window.customApi.getAllFile();
-    console.log(a);
+    console.log(window.customApi.rootFolder);
+    //let a = await window.customApi.getAllFile();
+    //console.log(a);
   };
 
   return (

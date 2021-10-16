@@ -11,7 +11,14 @@ declare interface Window {
 interface CustomAPI {
   readFile: (dir: string) => Promise<string>;
   writeFile: (dir: string, data: string) => Promise<void>;
-  getAllFile: () => Promise<string[]>;
+  getAllFile: (dir: string) => Promise<string[]>;
   getDirname: string;
-  dataFolder: string;
+  rootFolder: string;
+  path: PlatformPath;
+  paths: {
+    root_folder: string;
+    note_folder: string;
+    todo_folder: string;
+    setting_folder: string;
+  };
 }
