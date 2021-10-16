@@ -2,12 +2,13 @@ import { contextBridge, ipcRenderer } from "electron";
 import { readFile, writeFile, readdir, mkdir } from "fs/promises";
 import * as path from "path";
 
+import * as Constant from "./constant";
 import { ROOT, NOTE, TODO, SETTING } from "./constant";
 const userDataPath = ipcRenderer.sendSync("get-user-data-path", "ping");
 const root_folder = path.join(userDataPath, ROOT);
-const note_folder = path.join(root_folder, NOTE);
-const todo_folder = path.join(root_folder, TODO);
-const setting_folder = path.join(root_folder, SETTING);
+const note_folder = NOTE;
+const todo_folder = TODO;
+const setting_folder = SETTING;
 
 /**
  * Init Folders
@@ -18,9 +19,9 @@ const setting_folder = path.join(root_folder, SETTING);
  *
  */
 mkdir(root_folder, { recursive: true });
-mkdir(note_folder, { recursive: true });
-mkdir(todo_folder, { recursive: true });
-mkdir(setting_folder, { recursive: true });
+mkdir(path.join(root_folder, NOTE), { recursive: true });
+mkdir(path.join(root_folder, TODO), { recursive: true });
+mkdir(path.join(root_folder, SETTING), { recursive: true });
 
 const customKey = "customApi";
 /**
@@ -31,7 +32,7 @@ const customApi = {
     await readFile(path.join(root_folder, dir), { encoding: "utf-8" }),
   writeFile: async (dir: string, data: string) =>
     await writeFile(path.join(root_folder, dir), data),
-  getAllFile: async (dir: string) => await readdir(dir),
+  getAllFile: async (dir: string) => await readdir(path.join(root_folder, dir)),
   getDirname: __dirname,
   rootFolder: root_folder,
   path: path,
