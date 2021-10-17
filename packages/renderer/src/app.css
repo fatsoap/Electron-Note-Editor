@@ -1,12 +1,17 @@
-html, body, #root {
+html,
+body,
+#root {
   width: 100%;
   height: 100%;
 }
 * {
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 .app {
+  position: fixed;
+  left: 0;
+  top: 0;
   background-color: transparent;
   width: 100%;
   height: 100%;

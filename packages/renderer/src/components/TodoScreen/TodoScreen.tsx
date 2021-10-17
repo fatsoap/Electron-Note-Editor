@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, createRef } from "react";
 import "./TodoScreen.css";
 import MDEditor from "@uiw/react-md-editor";
+import trashcan from "../../../assets/trashcan.png";
 
 interface todo {
   height: number;
   text: string;
+  isDone: boolean;
 }
 
 const TodoScreen = () => {
@@ -12,10 +14,9 @@ const TodoScreen = () => {
     window.customApi;
   const default_file_name = path.join(paths.todo_folder, "TODO.txt");
   const default_height = 31;
-  const [text, setText] = useState<todo[]>([
-    { height: default_height, text: "**Hello world!!!**" },
-  ]);
+  const [text, setText] = useState<todo[]>([]);
   const timer = useRef(-1);
+  const [focusList, setFocus] = useState(-1);
 
   //let main_screen = screen.getAllDisplays();
   let win_h = 500; //main_screen.size.height
@@ -39,7 +40,19 @@ const TodoScreen = () => {
     }
   };
 
-  const search_timer = (txt: string) => {
+  const addTodo = () => {
+    setFocus(text.length);
+    setText([...text, { text: "", height: default_height, isDone: false }]);
+  };
+
+  const deleteDoneTodo = () => {
+    let new_todo = text.filter((t) => !t.isDone);
+    setFocus(new_todo.length - 1);
+    setText([...new_todo]);
+    save_timer(JSON.stringify(new_todo));
+  };
+
+  const save_timer = (txt: string) => {
     clearTimeout(timer.current);
     timer.current = window.setTimeout(() => {
       save(txt);
@@ -50,14 +63,16 @@ const TodoScreen = () => {
     await writeFile(default_file_name, txt);
   };
 
-  const dragStart = (e: React.DragEvent<HTMLTextAreaElement>) => {
-    const id = (e.target as HTMLTextAreaElement).id;
+  const dragStart = (e: React.DragEvent<HTMLLIElement>) => {
+    let id = (e.target as HTMLLIElement).id;
+    id = id.split("_")[0];
     e.dataTransfer.setData("text/plain", id);
   };
 
-  const dragDrop = (e: React.DragEvent<HTMLTextAreaElement>) => {
-    const old_id = Number(e.dataTransfer.getData("text/plain"));
-    const new_id = Number((e.target as HTMLTextAreaElement).id);
+  const dragDrop = (e: React.DragEvent<HTMLLIElement>) => {
+    let old_id = Number(e.dataTransfer.getData("text/plain"));
+    let new_id = Number((e.target as HTMLLIElement).id.split("_")[0]);
+
     let tmp = text[old_id];
     text[old_id] = text[new_id];
     text[new_id] = tmp;
@@ -72,33 +87,70 @@ const TodoScreen = () => {
       new_text[index] = {
         text: e.target.value,
         height: Number(e.target.scrollHeight),
+        isDone: text[index].isDone,
       };
       setText([...new_text]);
-      search_timer(JSON.stringify(new_text));
+      save_timer(JSON.stringify(new_text));
+    };
+  };
+
+  const toggleIsDone = (index: number) => {
+    return () => {
+      let new_text = text;
+      new_text[index] = {
+        ...text[index],
+        isDone: !text[index].isDone,
+      };
+      setText([...new_text]);
+      save_timer(JSON.stringify(new_text));
     };
   };
 
   return (
     <div className="note-container" style={{}}>
-      <button
-        onClick={() => setText([...text, { text: "", height: default_height }])}
-        className="add-todo plus"
-      />
-      {text.map((t, i) => {
-        return (
-          <textarea
-            id={i.toString()}
-            key={i}
-            className="todo-list"
-            value={t.text}
-            style={{ height: t.height }}
-            draggable="true"
-            onDragStart={dragStart}
-            onDrop={dragDrop}
-            onChange={textareaAutoHeight(i)}
-          ></textarea>
-        );
-      })}
+      <button onClick={addTodo} className="add-todo plus" />
+      <header className="todo-tool-bar">
+        <img
+          src={trashcan}
+          className="todo-tool-bar-icon"
+          onClick={deleteDoneTodo}
+        />
+      </header>
+      <ul className="todo-ul">
+        {text.map((t, i) => {
+          return (
+            <li
+              id={i.toString() + "_todo_list"}
+              key={i}
+              className={
+                focusList === i ? "todo-list todo-list-focus" : "todo-list"
+              }
+              onClick={() => {
+                setFocus(i);
+              }}
+              draggable="true"
+              onDragStart={dragStart}
+              onDrop={dragDrop}
+            >
+              <span
+                className={t.isDone ? "todo-dot todo-dot-ac" : "todo-dot"}
+                onClick={toggleIsDone(i)}
+              />
+              <textarea
+                id={i.toString() + "_todo_textarea"}
+                autoFocus={focusList === i}
+                className={t.isDone ? "todo-text todo-text-ac" : "todo-text"}
+                draggable="false"
+                value={t.text}
+                style={{ height: t.height }}
+                spellCheck={false}
+                onChange={textareaAutoHeight(i)}
+              ></textarea>
+              <div className="todo-drag"></div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
