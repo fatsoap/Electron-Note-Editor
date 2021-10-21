@@ -30,10 +30,7 @@ const TodoScreen = () => {
     let allTodos = await getAllFile(paths.todo_folder);
     if (allTodos.length === 0) {
       // do nothing
-      await writeFile(
-        default_file_name,
-        JSON.stringify([{ height: default_height, text: "**Hello world!!!**" }])
-      );
+      await writeFile(default_file_name, JSON.stringify([]));
     } else {
       let content = await readFile(default_file_name);
       setText(JSON.parse(content));
