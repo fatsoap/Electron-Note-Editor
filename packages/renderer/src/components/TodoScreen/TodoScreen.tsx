@@ -106,7 +106,7 @@ const TodoScreen = () => {
   };
 
   return (
-    <div className="note-container" style={{}}>
+    <div className="todo-container" style={{}}>
       <button onClick={addTodo} className="add-todo plus" />
       <header className="todo-tool-bar">
         <img
