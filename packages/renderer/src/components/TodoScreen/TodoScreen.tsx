@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, createRef } from "react";
 import "./TodoScreen.css";
 import MDEditor from "@uiw/react-md-editor";
 import trashcan from "../../../assets/trashcan.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 interface todo {
   height: number;
@@ -129,10 +131,14 @@ const TodoScreen = () => {
               onDragStart={dragStart}
               onDrop={dragDrop}
             >
-              <span
-                className={t.isDone ? "todo-dot todo-dot-ac" : "todo-dot"}
-                onClick={toggleIsDone(i)}
-              />
+              <span className={"todo-dot"} onClick={toggleIsDone(i)}>
+                {t.isDone && (
+                  <FontAwesomeIcon
+                    icon={faCheckCircle}
+                    className="todo-dot-ac"
+                  />
+                )}
+              </span>
               <textarea
                 id={i.toString() + "_todo_textarea"}
                 autoFocus={focusList === i}

@@ -73,10 +73,14 @@
   margin: 0 5px 0 5px;
   border: 1px solid #bebebe;
   background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .todo-dot-ac {
-  background-color: #e3ffd7;
+  font-size: 20px;
+  color: #5e9ed6;
 }
 
 .todo-drag {
