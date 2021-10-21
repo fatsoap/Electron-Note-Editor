@@ -143,6 +143,7 @@ const TodoScreen = () => {
                 id={i.toString() + "_todo_textarea"}
                 autoFocus={focusList === i}
                 className={t.isDone ? "todo-text todo-text-ac" : "todo-text"}
+                disabled={t.isDone}
                 draggable="false"
                 value={t.text}
                 style={{ height: t.height }}
