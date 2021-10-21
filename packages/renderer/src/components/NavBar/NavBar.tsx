@@ -1,41 +1,61 @@
 import React, { useState } from "react";
 import "./NavBar.css";
 import { useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCoffee,
+  faCheckCircle,
+  faStickyNote,
+  faComment,
+  faCogs,
+} from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
   const history = useHistory();
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState("");
 
   return (
     <div className="nav-container" style={{}}>
-      <div className={current.toString()}>
+      <div>
         <button
+          className={
+            current === "note" ? "nav-bar-btn  nav-bar-btn-ac" : "nav-bar-btn "
+          }
           onClick={() => {
-            setCurrent(1);
+            setCurrent("note");
             history.push("/note");
           }}
         >
-          Note
+          <FontAwesomeIcon icon={faStickyNote} className="nav-bar-icon" />
         </button>
       </div>
       <div>
         <button
+          className={
+            current === "todo" ? "nav-bar-btn  nav-bar-btn-ac" : "nav-bar-btn "
+          }
           onClick={() => {
-            setCurrent(1);
+            setCurrent("todo");
             history.push("/todo");
           }}
         >
-          Todo
+          <FontAwesomeIcon icon={faCheckCircle} className="nav-bar-icon" />
         </button>
       </div>
+
       <div>
         <button
+          className={
+            current === "setting"
+              ? " nav-bar-btn nav-bar-btn-ac"
+              : "nav-bar-btn"
+          }
           onClick={() => {
-            setCurrent(1);
-            history.push("/");
+            setCurrent("setting");
+            history.push("/setting");
           }}
         >
-          Note
+          <FontAwesomeIcon icon={faCogs} className="nav-bar-icon" />
         </button>
       </div>
     </div>

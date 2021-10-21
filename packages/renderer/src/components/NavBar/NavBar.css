@@ -1,8 +1,27 @@
 .nav-container {
   height: 100%;
-  padding: 10px;
-  background-color: #ffffff;
-  border: 1px solid #b4b4b4;
-  border-radius: 10px;
+  padding: 5px;
+  background-color: #000000b9;
+  border: 0px;
+  /* border-radius: 0px 10px 10px 0px; */
 }
 
+.nav-bar-icon {
+  font-size: 25px;
+}
+
+.nav-bar-btn {
+  border: 0px;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  margin: 5px;
+  padding: 0px;
+  background-color: #acd5f8;
+  transition: 0.3s;
+}
+
+.nav-bar-btn-ac {
+  transition: 0.3s;
+  border-radius: 25%;
+}
