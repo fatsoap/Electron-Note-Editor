@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import TodoScreen from "./components/TodoScreen/TodoScreen";
+import SettingScreen from "./components/SettingScreen/SettingScreen";
 
 const App = () => {
   return (
@@ -25,6 +26,9 @@ const App = () => {
               </Route>
               <Route path="/todo">
                 <TodoScreen />
+              </Route>
+              <Route path="/setting">
+                <SettingScreen />
               </Route>
               <Route path="/">
                 <div />

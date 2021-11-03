@@ -1,0 +1,141 @@
+.todo-container {
+  /* width: 500px; */
+  /* width: 80%; */
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background-color: #5f5f6888;
+  border: 0px;
+  overflow-y: scroll;
+  position: relative;
+}
+
+[draggable="true"] {
+  /*
+   To prevent user selecting inside the drag source
+  */
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.todo-ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-list {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 3px 0 5px 0;
+  padding: 5px 5px 5px 5px;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  background-color: #ffffff90;
+}
+
+.todo-list-focus {
+  border-color: #5e9ed6;
+}
+
+.todo-text {
+  width: calc(100% - 25px - 20px);
+  resize: none;
+  overflow: hidden;
+  padding: 5px 0 5px 5px;
+  border: 0;
+  outline: none;
+  font-size: 18px;
+  color: #000;
+  background-color: transparent;
+}
+
+.todo-text-ac {
+  color: #000;
+  font-weight: bold;
+}
+
+.todo-dot {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0 5px 0 5px;
+  border: 1px solid #bebebe;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-dot-ac {
+  font-size: 20px;
+  color: #5e9ed6;
+}
+
+.todo-drag {
+  width: 20px;
+  height: 100%;
+  background-color: #b4b4b4;
+}
+
+.add-todo {
+  border: 1px solid #000;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  margin: 0px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.add-todo.plus:before,
+.add-todo.plus:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: green;
+}
+.add-todo.plus:before {
+  width: 5px;
+  margin: 5px auto;
+}
+.add-todo.plus:after {
+  margin: auto 5px;
+  height: 5px;
+}
+
+.todo-tool-bar {
+  border: 1px solid #000;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.todo-tool-bar-icon {
+  width: 30px;
+  height: 30px;
+}
