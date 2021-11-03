@@ -15,21 +15,23 @@ const App = () => {
   return (
     <div className="app">
       <Router>
-        <img src={bg} id="background" />
-        <main className="main-container">
+        <div className="app-container">
           <NavBar />
-          <Switch>
-            <Route path="/note">
-              <NoteScreen />
-            </Route>
-            <Route path="/todo">
-              <TodoScreen />
-            </Route>
-            <Route path="/">
-              <div />
-            </Route>
-          </Switch>
-        </main>
+          <main className="main-container">
+            <img src={bg} id="background" />
+            <Switch>
+              <Route path="/note">
+                <NoteScreen />
+              </Route>
+              <Route path="/todo">
+                <TodoScreen />
+              </Route>
+              <Route path="/">
+                <div />
+              </Route>
+            </Switch>
+          </main>
+        </div>
       </Router>
     </div>
   );

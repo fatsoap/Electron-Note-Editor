@@ -48,6 +48,9 @@
   },
   "dependencies": {
     "@codemirror/lang-markdown": "^0.19.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16",
     "@uiw/react-codemirror": "^4.0.1",
     "@uiw/react-md-editor": "^3.6.4",
     "electron-updater": "4.6.0",

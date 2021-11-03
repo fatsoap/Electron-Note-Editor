@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, createRef } from "react";
 import "./TodoScreen.css";
 import MDEditor from "@uiw/react-md-editor";
 import trashcan from "../../../assets/trashcan.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 interface todo {
   height: number;
@@ -30,10 +32,7 @@ const TodoScreen = () => {
     let allTodos = await getAllFile(paths.todo_folder);
     if (allTodos.length === 0) {
       // do nothing
-      await writeFile(
-        default_file_name,
-        JSON.stringify([{ height: default_height, text: "**Hello world!!!**" }])
-      );
+      await writeFile(default_file_name, JSON.stringify([]));
     } else {
       let content = await readFile(default_file_name);
       setText(JSON.parse(content));
@@ -107,7 +106,7 @@ const TodoScreen = () => {
   };
 
   return (
-    <div className="note-container" style={{}}>
+    <div className="todo-container" style={{}}>
       <button onClick={addTodo} className="add-todo plus" />
       <header className="todo-tool-bar">
         <img
@@ -132,14 +131,19 @@ const TodoScreen = () => {
               onDragStart={dragStart}
               onDrop={dragDrop}
             >
-              <span
-                className={t.isDone ? "todo-dot todo-dot-ac" : "todo-dot"}
-                onClick={toggleIsDone(i)}
-              />
+              <span className={"todo-dot"} onClick={toggleIsDone(i)}>
+                {t.isDone && (
+                  <FontAwesomeIcon
+                    icon={faCheckCircle}
+                    className="todo-dot-ac"
+                  />
+                )}
+              </span>
               <textarea
                 id={i.toString() + "_todo_textarea"}
                 autoFocus={focusList === i}
                 className={t.isDone ? "todo-text todo-text-ac" : "todo-text"}
+                disabled={t.isDone}
                 draggable="false"
                 value={t.text}
                 style={{ height: t.height }}
